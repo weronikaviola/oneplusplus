@@ -43,8 +43,6 @@ function login(creds) {
 }
 
 
-
-
 export default {
 	getUser,
 	signup,
