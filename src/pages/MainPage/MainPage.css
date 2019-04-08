@@ -1,0 +1,17 @@
+.MainPage {
+    background: rgb(37, 37, 37);
+    color: white;
+    height: 80vh;
+}
+.MainPage-text {
+    text-align: justify;
+    margin: 0px auto;
+    width: 80%;
+    padding: 10vh 0;
+}
+
+@media only screen and (min-width: 768px) {
+    .MainPage {
+        height: 82vh;
+    }
+}

@@ -1,0 +1,13 @@
+.NavBar {
+  margin: 0 auto;
+  font-size: calc(20px + 6 * ((100vw - 320px) / 680));
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.NavBar-link:hover {
+  text-decoration: none;
+}
+.NavBar-welcome {
+	color: red;
+}

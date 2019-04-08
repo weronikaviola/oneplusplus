@@ -4,13 +4,14 @@ import { Route, Switch, Redirect, Link } from 'react-router-dom';
 
 import userService from '../../utils/userService';
 
-import NavBar from '../../components/NavBar/NavBar';
+import Header from '../../components/Header/Header';
 import SignupPage from '../SignupPage/SignupPage';
 import LoginPage from '../LoginPage/LoginPage';
 import MainPage from '../MainPage/MainPage';
+import About from '../About/About';
+import TestPage from '../TestPage/TestPage';
+import Creators from '../Creators/Creators';
 
-//react-router-dom comes with 'Link' and 'NavLink' components to use in place of <a> tag. Remember
-//and delete this comment later :D
 
 class App extends Component {
   constructor() {
@@ -46,10 +47,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <header className="jumbotron">
-          <h3>1++</h3>
-        </header>
-        <NavBar user={this.state.user} handleLogout={this.handleLogout} />
+        <Header user={this.state.user} handleLogout={this.handleLogout} />
         <Switch>
           <Route exact path='/' render={() =>
             <MainPage
@@ -67,6 +65,17 @@ class App extends Component {
               history={history}
               handleSignupOrLogin={this.handleSignupOrLogin}
             />
+          } />
+          <Route exact path='/about' render={() =>
+            <About />
+          } />
+          <Route exact path='/test' render={({ history }) =>
+            <TestPage
+              history={history}
+            />
+          } />
+          <Route exact path='/creators' render={() =>
+            <Creators />
           } />
         </Switch>
       </div>
