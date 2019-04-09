@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 import './App.css';
 import { Route, Switch, Redirect, Link } from 'react-router-dom';
 
@@ -44,6 +45,9 @@ class App extends Component {
     );
   }
 
+  unmountApp() {
+    ReactDOM.unmountComponentAtNode(document.getElementById('root'));
+  }
   render() {
     return (
       <div className="App">
@@ -72,13 +76,14 @@ class App extends Component {
           <Route exact path='/test' render={({ history }) =>
             <TestPage
               history={history}
+              unmountApp={this.unmountApp}
             />
           } />
           <Route exact path='/creators' render={() =>
             <Creators />
           } />
         </Switch>
-      </div>
+      </div >
     );
   }
 }
