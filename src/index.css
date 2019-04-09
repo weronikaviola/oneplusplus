@@ -11,3 +11,11 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.BackBtn {
+  display: block;
+  width: 100%;
+  text-align: left;
+  font-size: 18px;
+  padding: 0 20px;
+}

@@ -90,9 +90,8 @@ class TestPage extends React.Component {
     render() {
         return (
             <div>
-                <Link to='/'>back</Link>
+                <Link class='BackBtn' to='/'>back</Link>
                 <br />
-                Stage: {this.state.stage}
                 <br />
                 <Timer time={this.state.timer} />
                 <br />
