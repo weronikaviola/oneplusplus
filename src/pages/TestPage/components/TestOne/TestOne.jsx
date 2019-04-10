@@ -23,7 +23,7 @@ class TestOne extends React.Component {
                     <div className='form-group'>
                         <div className='col-sm-12'>
                             <h2> 9 | 5 </h2>
-                            <input type="text" className="form-control" name="answer1" value={this.state.answer} onChange={this.handleChange} />
+                            <input type="text" className="form-control" name="answer1" autocomplete='off' value={this.state.answer} onChange={this.handleChange} />
                         </div>
                     </div>
 

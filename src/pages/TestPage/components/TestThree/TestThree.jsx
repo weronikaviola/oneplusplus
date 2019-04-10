@@ -24,7 +24,7 @@ class TestThree extends React.Component {
                         <div className='col-sm-12'>
                             <h2>Type this number in decimal</h2>
                             <h2>11111111</h2>
-                            <input type="text" className="form-control" name="answer3" value={this.state.answer} onChange={this.handleChange} />
+                            <input type="text" autocomplete='off' className="form-control" name="answer3" value={this.state.answer} onChange={this.handleChange} />
                         </div>
                     </div>
                 </form>

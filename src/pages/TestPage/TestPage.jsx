@@ -78,6 +78,7 @@ class TestPage extends React.Component {
     lostTheTest = () => {
         this.props.history.push('/');
         this.props.unmountApp();
+        window.open('http://www.eharmony.com/');
     }
 
     answers() {

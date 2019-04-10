@@ -21,7 +21,7 @@ class TestTwo extends React.Component {
                     <div className='form-group'>
                         <div className='col-sm-12'>
                             <h2> 20 &amp; 24 </h2>
-                            <input type="text" className="form-control" name="answer2" value={this.state.answer} onChange={this.handleChange} />
+                            <input type="text" autocomplete='off' className="form-control" name="answer2" value={this.state.answer} onChange={this.handleChange} />
                         </div>
                     </div>
                 </form>

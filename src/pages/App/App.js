@@ -12,7 +12,7 @@ import MainPage from '../MainPage/MainPage';
 import About from '../About/About';
 import TestPage from '../TestPage/TestPage';
 import Creators from '../Creators/Creators';
-
+import ProfilePage from '../ProfilePage/ProfilePage';
 
 class App extends Component {
   constructor() {
@@ -39,7 +39,6 @@ class App extends Component {
   /*---- lifecycle methods ----*/
   async componentDidMount() {
     const user = userService.getUser();
-    console.log(user);
     this.setState(
       { user: user }
     );
@@ -81,6 +80,11 @@ class App extends Component {
           } />
           <Route exact path='/creators' render={() =>
             <Creators />
+          } />
+          <Route exact path='/profile/:id' render={() =>
+            <ProfilePage
+              user={this.state.user}
+            />
           } />
         </Switch>
       </div >

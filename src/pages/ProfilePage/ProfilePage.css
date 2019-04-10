@@ -1,0 +1,40 @@
+.ProfilePage {
+    display: grid;
+    padding: 30px;
+    grid-template-columns: 2fr 1fr;
+    grid-template-rows: 1fr 2fr 1fr 0.5fr;
+    grid-template-areas: 
+        "header photo"
+        "description photo"
+        "interests connections"
+        "nothing edit";
+}
+.ProfilePage > button {
+    grid-area: edit;
+}
+.ProfilePage > h1 {
+    background: black;
+    color: white;
+}
+.ProfilePage-description {
+    border: 1px solid gray;
+    padding: 10px;
+    text-align: justify;
+    grid-area: description;
+}
+.ProfilePage-interests {
+    grid-area: interests;
+}
+.ProfilePage-connections {
+    grid-area: connections;
+    position: relative;
+    bottom: 30%;
+}
+.ProfilePage-photo {
+    grid-area: photo;
+}
+.ProfilePage-photo > img {
+    width: 100%;
+    max-width: 200px;
+    box-shadow: 10px 10px 40px gray;
+}

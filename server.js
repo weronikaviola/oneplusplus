@@ -9,6 +9,7 @@ require('dotenv').config();
 require('./config/database');
 
 const userRouter = require('./routes/api/users');
+const profileRouter = require('./routes/api/profile');
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -17,7 +18,9 @@ app.use(favicon(path.join(__dirname, 'build', 'favicon.ico')));
 app.use(express.static(path.join(__dirname, 'build')));
 
 //all api routes here//
+app.use(require('./config/auth'));
 app.use('/api/users', userRouter);
+app.use('/api/profiles', profileRouter);
 
 
 ///everything else here//
