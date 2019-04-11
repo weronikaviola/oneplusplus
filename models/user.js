@@ -23,6 +23,15 @@ const userSchema = new Schema({
 	password: String,
 	connections: [{ type: Schema.Types.ObjectId, ref: 'User' }],
 	profile: profileSchema
+	// description: {
+	// 	type: String,
+	// 	maxlength: 500
+	// },
+	// photo: {
+	// 	type: String,
+	// 	maxlength: 500
+	// },
+	// interests: [String]
 }, { timestamps: true });
 
 

@@ -8,13 +8,11 @@ module.exports = {
 }
 
 function create(req, res) {
-    let profile = req.body;
-    profile.interests = profile.interests.split(',');
-    let photo = req.body.photo;
     User.findOneAndUpdate({ '_id': req.params.id }, { new: true })
         .then(user => {
-            user.profile = profile;
-            user.profile.photo = photo;
+            user.profile.interests = req.body.interests.split(',');
+            user.profile.description = req.body.description;
+            user.profile.photo = req.body.photo;
             return user.save()
         })
         .then(user =>

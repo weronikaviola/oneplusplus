@@ -16,6 +16,10 @@ class ProfilePage extends React.Component {
             console.log('error');
         }
     }
+
+    formatToBinary(num) {
+        return num.toString(2).padStart(8, '0');
+    }
     render() {
 
         if (this.props.user && this.props.user.profile) {
@@ -24,20 +28,20 @@ class ProfilePage extends React.Component {
                 <div className='ProfilePage'>
                     <h1>{this.props.user.name}</h1>
                     <div className='ProfilePage-description'>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum temporibus possimus maiores officiis sapiente nam dolor sunt, in, ducimus dolorem facere quod beatae quo quasi, suscipit facilis eligendi harum incidunt!
+                        {this.props.user.profile.description}
                     </div>
                     <div className='ProfilePage-photo'>
-                        <img src='https://yt3.ggpht.com/a-/AAuE7mDWUMj2x58BEADicaLmA9MTvdgZEWpzJNtM5w=s900-mo-c-c0xffffffff-rj-k-no' />
+                        <img src={this.props.user.profile.photo ? this.props.user.profile.photo : ''} alt='profile' />
                     </div>
                     <div className='ProfilePage-interests'>
                         <h3>I like: </h3>
-                        asjdlfkjaslkdfjlaskdjflkajs
-                        asldkfjlaskjdflkasjdlf
-                        aksdjflkasjdf
+                        {this.props.user.profile.interests.map(element => (
+                            <div>{element}</div>
+                        ))}
                     </div>
                     <div className='ProfilePage-connections'>
                         <h3>Connections: </h3>
-                        00000001
+                        {this.formatToBinary(this.props.user.connections.length)}
                     </div>
                     <button type="button" className='btn btn-success'>edit</button>
                 </div>

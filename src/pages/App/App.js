@@ -46,9 +46,9 @@ class App extends Component {
   /*---- lifecycle methods ----*/
   async componentDidMount() {
     const user = userService.getUser();
-    // this.setState(
-    //   { user: user }
-    // );
+    this.setState(
+      { user: user }
+    );
   }
 
   unmountApp() {
