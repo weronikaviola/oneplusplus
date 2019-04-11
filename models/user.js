@@ -1,12 +1,28 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
+const Schema = mongoose.Schema;
 
 const SALT_ROUNDS = 6;
 
-const userSchema = new mongoose.Schema({
+
+const profileSchema = new Schema({
+	description: {
+		type: String,
+		maxlength: 500
+	},
+	photo: {
+		type: String,
+		maxlength: 500
+	},
+	interests: [String],
+});
+
+const userSchema = new Schema({
 	name: String,
 	email: { type: String, required: true, lowercase: true },
-	password: String
+	password: String,
+	connections: [{ type: Schema.Types.ObjectId, ref: 'User' }],
+	profile: profileSchema
 }, { timestamps: true });
 
 

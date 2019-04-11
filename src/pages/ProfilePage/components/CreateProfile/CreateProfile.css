@@ -1,0 +1,4 @@
+.CreateProfile {
+    display: flex;
+    flex-direction: column;
+}

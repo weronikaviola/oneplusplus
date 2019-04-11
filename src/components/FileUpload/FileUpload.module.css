@@ -1,0 +1,26 @@
+.fileUploaderDiv {
+    /* display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; */
+}
+.buttonDiv {
+    width: 100%;
+    height: 10vh;
+    border: 1px solid rgba(200,200,200);
+    border-radius: 5px;
+}
+.fileDiv {
+    width: 100%;
+    height: 30vh;
+    border: 1px solid rgba(200,200,200);
+    border-radius: 5px;
+    margin: 0 auto 5px auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    object-fit: contain;
+}
+.image {
+    height: 100%;
+}

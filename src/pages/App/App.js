@@ -36,12 +36,19 @@ class App extends Component {
     userService.logout();
     this.setState({ user: null });
   }
+
+  updateUserState = (profile) => {
+    this.setState(state => {
+      let user = { ...this.state.user, profile: profile };
+      this.setState({ user: user });
+    })
+  }
   /*---- lifecycle methods ----*/
   async componentDidMount() {
     const user = userService.getUser();
-    this.setState(
-      { user: user }
-    );
+    // this.setState(
+    //   { user: user }
+    // );
   }
 
   unmountApp() {
@@ -84,6 +91,7 @@ class App extends Component {
           <Route exact path='/profile/:id' render={() =>
             <ProfilePage
               user={this.state.user}
+              updateUserState={this.updateUserState}
             />
           } />
         </Switch>
