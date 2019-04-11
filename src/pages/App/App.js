@@ -12,7 +12,8 @@ import MainPage from '../MainPage/MainPage';
 import About from '../About/About';
 import TestPage from '../TestPage/TestPage';
 import Creators from '../Creators/Creators';
-import ProfilePage from '../ProfilePage/ProfilePage';
+import MyProfilePage from '../ProfilePage/MyProfilePage';
+import People from '../People/People';
 
 class App extends Component {
   constructor() {
@@ -88,12 +89,16 @@ class App extends Component {
           <Route exact path='/creators' render={() =>
             <Creators />
           } />
-          <Route exact path='/profile/:id' render={() =>
-            <ProfilePage
+          <Route exact path='/profile' render={() =>
+            <MyProfilePage
               user={this.state.user}
               updateUserState={this.updateUserState}
             />
           } />
+          {this.state.user &&
+            <Route exact path='/people' render={() => (
+              <People user={this.state.user._id} />
+            )} />}
         </Switch>
       </div >
     );

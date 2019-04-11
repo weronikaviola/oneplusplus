@@ -4,8 +4,25 @@ const Profile = require('../models/userProfile');
 
 module.exports = {
     myProfile,
-    create
+    create,
+    getConnections
 }
+
+function getConnections(req, res) {
+    console.log('got here');
+    let connections = [];
+    User.findById(req.params.id).populate('connections')
+        .then(user => {
+            User.find({ _id: { $nin: user.connections } })
+        }).then(users => {
+            if (users) {
+                connections = [...connections, ...users]
+            }
+            console.log(connections);
+        }).catch(err =>
+            console.log(err));
+}
+
 
 function create(req, res) {
     User.findOneAndUpdate({ '_id': req.params.id }, { new: true })
