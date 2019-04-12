@@ -9,7 +9,7 @@ class LoginPage extends React.Component {
 	state = {
 		email: '',
 		pw: '',
-		message: ''
+		message: ' '
 	};
 
 	handleChange = (e) => {
@@ -30,9 +30,19 @@ class LoginPage extends React.Component {
 	handleSubmit = async (e) => {
 		e.preventDefault();
 		try {
-			await userService.login({ email: this.state.email, pw: this.state.pw });
-			this.props.handleSignupOrLogin();
-			this.props.history.push('/');
+			let response = await userService.login({ email: this.state.email, pw: this.state.pw });
+			console.log(response);
+			if (response.err) {
+				this.setState({
+					message: response.err,
+				});
+			}
+			else {
+				console.log(response)
+				this.props.handleSignupOrLogin();
+				this.props.history.push('/');
+			}
+
 		} catch (err) {
 			this.displayErrorMessage();
 		}
@@ -53,6 +63,10 @@ class LoginPage extends React.Component {
 							<input type="password" className="form-control" placeholder="Password" autoComplete='current-password' value={this.state.pw} name="pw" onChange={this.handleChange} />
 						</div>
 					</div>
+					<div className='form-group'>
+						{this.state.message}
+					</div>
+
 					<div className="form-group">
 						<div className="col-sm-12 text-center">
 							<button className="btn btn-default">Log In</button>&nbsp;&nbsp;&nbsp;

@@ -22,11 +22,11 @@ app.use(express.static(path.join(__dirname, 'build')));
 
 
 app.post('/file-upload', awsConfig.upload);
+app.use('/api/users', userRouter);
+
 app.use(require('./config/auth'));
 
-app.use('/api/users', userRouter);
 app.use('/api/profiles', profileRouter);
-
 
 
 ///everything else here//

@@ -2,6 +2,7 @@ import React from 'react';
 
 import './CreateProfile.css';
 import FileUpload from '../../../../components/FileUpload/FileUpload';
+import tokenService from '../../../../utils/tokenService';
 
 class CreateProfile extends React.Component {
     constructor() {
@@ -10,6 +11,7 @@ class CreateProfile extends React.Component {
             description: '',
             photo: '',
             interests: '',
+            message: ''
         }
     }
 
@@ -25,7 +27,11 @@ class CreateProfile extends React.Component {
 
     handleSubmit = async (evt) => {
         evt.preventDefault();
-        await this.createProfile(this.state);
+        await this.createProfile({
+            description: this.state.description,
+            photo: this.state.photo,
+            interests: this.state.interests
+        });
     }
 
     handleChange = (e) => {
@@ -35,16 +41,25 @@ class CreateProfile extends React.Component {
     }
 
     async createProfile(data) {
-        let url = `/api/profiles/${this.props.userId}/create`
-        let user = await fetch(url, {
+        let url = `/api/profiles/create`
+        let response = await fetch(url, {
             method: 'POST',
             body: JSON.stringify(data),
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + tokenService.getToken()
             }
-        }).then(res => res.json())
-        console.log(user);
-        this.props.updateUser(user.profile);
+        }).then(res =>
+            res.json()
+        )
+        if (response.token) {
+            tokenService.setToken(response.token);
+            this.props.updateUser();
+        } else if (response.err) {
+            this.setState({
+                message: response.err
+            });
+        }
     }
 
     render() {
@@ -74,6 +89,11 @@ class CreateProfile extends React.Component {
                     <div className='form-group'>
                         <div className='col-sm-12 text-center'>
                             <button className="btn btn-default" disabled={this.isFormInvalid()}>OK</button>
+                        </div>
+                    </div>
+                    <div className='form-group'>
+                        <div className='col-sm-12 text-center'>
+                            {this.state.message}
                         </div>
                     </div>
                 </form>

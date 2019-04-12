@@ -1,29 +1,37 @@
 import React from 'react';
+import tokenService from '../../../../utils/tokenService';
 
 class MyConnections extends React.Component {
-    constructor(props) {
-        super(props);
-        this.user = props.user;
-        this.state = { connections: [] }
+    constructor() {
+        super();
+        this.state = {
+            connections: []
+        }
     }
 
     getConnections = async () => {
-        let url = `/api/profiles/${this.user}/all`;
-        let connections = await fetch(url).then(res => res.json());
-        return connections;
+        return await fetch('/api/profiles/all', {
+            headers: {
+                'Authorization': 'Bearer ' + tokenService.getToken()
+            }
+        }).then(res => res.json());
     }
 
-    componentDidMount() {
-        let connections = this.getConnections();
-        console.log(connections);
+    componentDidMount = async () => {
+        let response = await this.getConnections();
+        this.setState({
+            connections: response.connections
+        });
     }
 
     render() {
         return (
             <div>
-                {this.props.user}<br />
                 MyConnections page
-            </div >
+                {this.state.connections.map(connection => (
+                    <div key={connection._id}>{connection.name}</div>
+                ))}
+            </ div >
         );
     };
 }

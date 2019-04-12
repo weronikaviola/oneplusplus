@@ -7,7 +7,7 @@ const People = (props) => {
     return (
         <div className='People'>
 
-            <MyConnections user={props.user} />
+            <MyConnections />
             <FindPeople />
         </div>
     );

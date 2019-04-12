@@ -38,18 +38,15 @@ class App extends Component {
     this.setState({ user: null });
   }
 
-  updateUserState = (profile) => {
-    this.setState(state => {
-      let user = { ...this.state.user, profile: profile };
-      this.setState({ user: user });
-    })
+  updateUserState = () => {
+    const user = userService.getUser();
+    this.setState({
+      user: user
+    });
   }
   /*---- lifecycle methods ----*/
   async componentDidMount() {
-    const user = userService.getUser();
-    this.setState(
-      { user: user }
-    );
+    this.updateUserState();
   }
 
   unmountApp() {
@@ -89,16 +86,18 @@ class App extends Component {
           <Route exact path='/creators' render={() =>
             <Creators />
           } />
-          <Route exact path='/profile' render={() =>
-            <MyProfilePage
-              user={this.state.user}
-              updateUserState={this.updateUserState}
-            />
-          } />
           {this.state.user &&
-            <Route exact path='/people' render={() => (
-              <People user={this.state.user._id} />
-            )} />}
+            <>
+              <Route exact path='/profile' render={() =>
+                <MyProfilePage
+                  user={this.state.user}
+                  updateUserState={this.updateUserState}
+                />
+              } />
+              <Route exact path='/people' render={() => (
+                <People user={this.state.user._id} />
+              )} />
+            </>}
         </Switch>
       </div >
     );

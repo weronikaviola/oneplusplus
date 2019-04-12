@@ -1,9 +1,30 @@
 import React from 'react';
 
-// import '../../MyProfilePage.css';
+import tokenService from '../../../../utils/tokenService';
+
 import '../../ProfilePage.css';
 
 class DisplayProfile extends React.Component {
+    constructor(props) {
+        super();
+        this.state = {
+            user: props.user
+        }
+    }
+    componentDidMount() {
+        this.getLatestUserData()
+    }
+
+    getLatestUserData = async () => {
+        let data = await fetch('/api/profiles/', {
+            headers: {
+                'Authorization': 'Bearer ' + tokenService.getToken()
+            }
+        }).then(res => res.json());
+        this.setState({
+            user: data
+        });
+    }
 
     formatToBinary(num) {
         return num.toString(2).padStart(8, '0');
@@ -29,18 +50,6 @@ class DisplayProfile extends React.Component {
                         <h1>}</h1>
                     </div>
                 </div>
-                {/* <div className='ProfilePage-interests'>
-                    <h3>I like: </h3>
-                    {this.props.user.profile.interests.map(element => (
-                        <div>{element}</div>
-                    ))}
-                </div>
-                <div className='ProfilePage-connections'>
-                    <h3>Connections: </h3>
-                    {this.formatToBinary(this.props.user.connections.length)}
-                </div>
-                {this.props.stateUser === this.props.user &&
-                    <button type="button" className='btn btn-success'>edit</button>} */}
             </div>
         )
     }

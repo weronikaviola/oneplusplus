@@ -7,12 +7,14 @@ const BASE_URL = '/api/users/';
 
 //functions
 function signup(user) {
+	console.log('in signup');
 	return fetch(BASE_URL + 'signup', {
 		method: 'POST',
 		headers: new Headers({ 'Content-Type': 'application/json' }),
 		body: JSON.stringify(user)
 	})
 		.then(res => {
+			console.log('ok, got res');
 			if (res.ok) return res.json();
 			throw new Error('Email already taken');
 		})
@@ -29,17 +31,25 @@ function logout() {
 	tokenService.removeToken();
 }
 
-function login(creds) {
-	return fetch(BASE_URL + 'login', {
+async function login(creds) {
+
+	let response = await fetch(BASE_URL + 'login', {
 		method: 'POST',
 		headers: new Headers({ 'Content-Type': 'application/json' }),
 		body: JSON.stringify(creds)
-	})
-		.then(res => {
-			if (res.ok) return res.json();
-			throw new Error('Invalid Credentials');
-		})
-		.then(({ token }) => tokenService.setToken(token));
+	}).then(res => res.json())
+		.catch(err => console.log(err));
+
+	if (response.err) {
+		return response;
+	}
+	else {
+		console.log(response);
+		await tokenService.setToken(response.token);
+		return { status: 'ok' }
+	}
+	// .then(({ token }) => tokenService.setToken(token))
+	// .catch(err => console.log(err));
 }
 
 

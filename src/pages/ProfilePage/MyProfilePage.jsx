@@ -13,17 +13,17 @@ class MyProfilePage extends React.Component {
 
         if (this.props.user && this.props.user.profile) {
             return (
-                <DisplayProfile stateUser={this.props.user} user={this.props.user} />
+                <DisplayProfile user={this.props.user} />
             );
         } else if (this.props.user) {
             return (
-                <CreateProfile updateUser={this.props.updateUserState} userId={this.props.user._id} />
+                <CreateProfile updateUser={this.props.updateUserState} />
             );
         }
         else {
             return (
                 <div className='ProfilePage'>
-                    Please log in to see your account...
+                    Please log in to see this page...
                 </div>
             );
         }

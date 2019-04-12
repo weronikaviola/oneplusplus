@@ -1,0 +1,11 @@
+.FindPeople {
+    border: 1px solid gray;
+    width: 90%;
+    padding: 10px;
+    margin: 5px auto;
+}
+.FindPeople-userBox {
+    border: 1px solid black;
+    width: 80%;
+    margin: 5px auto;
+}
