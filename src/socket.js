@@ -13,10 +13,8 @@ function registerChatroom(obj) {
 }
 
 socket.on('new-message', function (message) {
-    console.log('received the message');
     Chatroom.setState(state => {
         const AllMessages = [...state.messages, message];
-        console.log(AllMessages);
         return ({
             messages: AllMessages,
         });
@@ -33,7 +31,6 @@ function leaveChat() {
 
 function newMessage(msg) {
     socket.emit('new-message', msg);
-    console.log('sent');
 }
 
 export default {

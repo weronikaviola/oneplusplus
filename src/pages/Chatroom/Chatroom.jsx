@@ -4,15 +4,16 @@ import socket from '../../socket';
 import './Chatroom.css';
 
 class Chatroom extends React.Component {
-    constructor() {
+    constructor(props) {
         super();
         this.state = {
             message: '',
             messages: [{ author: 'weronika', text: 'testing messages' }, { author: 'weronika', text: 'testing messages' }]
         }
+        this.accumulator = 0;
+        this.messengerRef = React.createRef();
     }
 
-    accumulator = 0;
 
     handleChange = (evt) => {
         this.setState({
@@ -21,6 +22,7 @@ class Chatroom extends React.Component {
     }
 
     sendMessage = (evt) => {
+        console.log(this.messengerRef.current);
         socket.newMessage({
             author: this.props.user.name,
             text: this.state.message
@@ -30,13 +32,18 @@ class Chatroom extends React.Component {
         })
     }
     /////
-    componentDidMount() {
+    componentDidMount = () => {
         socket.registerChatroom(this);
+    }
+    componentDidUpdate = () => {
+        this.messengerRef.current.scrollTop = this.messengerRef.current.scrollHeight;
     }
     render() {
         return (
             <div className='Chatroom'>
-                <div className='Chatroom-messages'>
+                <div className='Chatroom-messages'
+                    ref={this.messengerRef}
+                >
                     {this.state.messages.map(msg => {
                         this.accumulator += 1;
                         return (

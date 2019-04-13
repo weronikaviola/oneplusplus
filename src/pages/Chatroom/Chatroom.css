@@ -1,11 +1,12 @@
 .Chatroom-messages {
-    display: flex;
+    /* display: flex; */
     border: 1px solid gray;
-    flex-direction: column;
-    align-items: flex-start;
+    /* flex-direction: column; */
+    /* align-items: flex-start; */
     padding: 10px;
     height: 70vh;
     overflow: auto;
+    position: bottom;
 }
 .Chatroom-oneMsg {
     width: 90%;
