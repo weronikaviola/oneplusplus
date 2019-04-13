@@ -61,7 +61,7 @@ class LoginPage extends React.Component {
 							<input type="password" className="form-control" placeholder="Password" autoComplete='current-password' value={this.state.pw} name="pw" onChange={this.handleChange} />
 						</div>
 					</div>
-					<div className='form-group'>
+					<div className='form-group red-text'>
 						{this.state.message}
 					</div>
 

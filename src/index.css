@@ -21,3 +21,12 @@ code {
   font-size: 18px;
   padding: 0 20px;
 }
+.gray-text {
+  color: rgb(50,50,50);
+}
+.red-text {
+  color: red;
+}
+.green-text {
+  color: green;
+}
