@@ -19,7 +19,8 @@
     "react-router-dom": "^5.0.0",
     "react-scripts": "2.1.8",
     "react-testing-library": "^6.1.2",
-    "serve-favicon": "^2.5.0"
+    "serve-favicon": "^2.5.0",
+    "socket.io": "^2.2.0"
   },
   "scripts": {
     "start": "react-scripts start",

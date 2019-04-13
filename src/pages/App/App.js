@@ -14,6 +14,9 @@ import TestPage from '../TestPage/TestPage';
 import Creators from '../Creators/Creators';
 import MyProfilePage from '../ProfilePage/MyProfilePage';
 import People from '../People/People';
+import Chatroom from '../Chatroom/Chatroom';
+
+import socket from '../../socket';
 
 class App extends Component {
   constructor() {
@@ -24,16 +27,22 @@ class App extends Component {
   getInitialState() {
     return {
       test: 'test state value',
-      user: null
+      user: null,
+      activeUsers: {}
     };
   }
 
   handleSignupOrLogin = () => {
-    this.setState({ user: userService.getUser() });
+    const user = userService.getUser();
+    if (user) {
+      socket.joinChat();
+      this.setState({ user });
+    }
   }
 
 
   handleLogout = () => {
+    socket.leaveChat();
     userService.logout();
     this.setState({ user: null });
   }
@@ -46,7 +55,12 @@ class App extends Component {
   }
   /*---- lifecycle methods ----*/
   async componentDidMount() {
-    this.updateUserState();
+    socket.registerApp(this);
+    const user = userService.getUser();
+    if (user) {
+      socket.joinChat();
+      this.setState({ user });
+    }
   }
 
   unmountApp() {
@@ -95,7 +109,10 @@ class App extends Component {
                 />
               } />
               <Route exact path='/people' render={() => (
-                <People user={this.state.user._id} />
+                <People updateUserState={this.updateUserState} />
+              )} />
+              <Route exact path='/chatroom' render={() => (
+                < Chatroom />
               )} />
             </>}
         </Switch>

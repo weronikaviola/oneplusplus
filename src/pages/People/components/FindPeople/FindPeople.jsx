@@ -10,7 +10,7 @@ class FindPeople extends React.Component {
         this.state = { users: [] }
     }
 
-    async findTenUsers() {
+    async findUsers() {
         let url = 'api/profiles/users'
         let response = await fetch(url, {
             headers: {
@@ -22,26 +22,35 @@ class FindPeople extends React.Component {
         this.setState({
             users: response.users
         });
+        console.log(response);
     }
 
-    addToConnections(userId) {
-        alert(`${userId}`);
-        let status = fetch('/api/profiles/add', {
+    async addToConnections(userId) {
+        await fetch('/api/profiles/add', {
             method: 'POST',
             body: JSON.stringify({ userId }),
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': 'Bearer ' + tokenService.getToken()
             }
-        }).then(res => {
-            if (res.status === 200) console.log('ok')
-            else console.log('not ok');
-        })
+        }).then(res => res.json())
+            .then(res => {
+                console.log(res);
+                if (res.token) {
+                    console.log('yes, we have token');
+                    tokenService.setToken(res.token);
+                    this.props.updateUserState();
+                    this.findUsers();
+                }
+            }).catch(err => {
+                console.log(err);
+            })
+
     }
 
     //////
     componentDidMount = () => {
-        this.findTenUsers();
+        this.findUsers();
     }
     render() {
         return (

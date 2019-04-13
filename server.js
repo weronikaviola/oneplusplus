@@ -9,6 +9,10 @@ const awsConfig = require('./config/aws');
 require('dotenv').config();
 require('./config/database');
 
+//socketio settings
+const http = require('http').Server(app);
+require('./io').init(http);
+
 const userRouter = require('./routes/api/users');
 const profileRouter = require('./routes/api/profile');
 
@@ -36,4 +40,4 @@ app.get('/*', function (req, res) {
 
 const port = process.env.PORT || 3001;
 
-app.listen(port, () => { console.log(`Express app running on port ${port}`) });
+http.listen(port, () => { console.log(`Running on port ${port}`) });

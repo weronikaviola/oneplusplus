@@ -7,14 +7,12 @@ const BASE_URL = '/api/users/';
 
 //functions
 function signup(user) {
-	console.log('in signup');
 	return fetch(BASE_URL + 'signup', {
 		method: 'POST',
 		headers: new Headers({ 'Content-Type': 'application/json' }),
 		body: JSON.stringify(user)
 	})
 		.then(res => {
-			console.log('ok, got res');
 			if (res.ok) return res.json();
 			throw new Error('Email already taken');
 		})
@@ -44,12 +42,10 @@ async function login(creds) {
 		return response;
 	}
 	else {
-		console.log(response);
 		await tokenService.setToken(response.token);
 		return { status: 'ok' }
 	}
-	// .then(({ token }) => tokenService.setToken(token))
-	// .catch(err => console.log(err));
+
 }
 
 

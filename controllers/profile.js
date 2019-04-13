@@ -15,14 +15,15 @@ module.exports = {
 
 function addConnection(req, res) {
     if (req.user) {
-        User.findByIdAndUpdate(req.user._id)
+        User.findByIdAndUpdate(req.user._id, { new: true })
             .then(user => {
                 if (user.connections.indexOf(req.body.userId) === -1) {
                     user.connections.push(req.body.userId);
                 }
                 return user.save();
             }).then(user => {
-                return res.json({ 'ok': 'ok' });
+                let token = createJWT(user);
+                return res.json({ token });
             });
     }
 }
@@ -43,8 +44,10 @@ function getAllFriends(req, res) {
 
 function getUsers(req, res) {
     if (req.user) {
-        User.find({})
+        console.log(req.user);
+        User.find({ _id: { $nin: req.user.connections } })
             .then(results => {
+                console.log(results);
                 return res.json({ users: results })
             }).catch(err => {
                 console.log(err);

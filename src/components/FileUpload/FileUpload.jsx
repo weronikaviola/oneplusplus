@@ -14,7 +14,7 @@ class FileUpload extends React.Component {
 
     submitAction = async (evt) => {
         evt.preventDefault();
-        //fileAddress will be an object {file: 'http://asdfkjs'}
+        //fileAddress will be an object: {file: 'http://asdfkjs'}
         let fileAddress = await photoService.submitFile(this.state.file[0]);
         this.props.callbackMethod(fileAddress.file);
     }

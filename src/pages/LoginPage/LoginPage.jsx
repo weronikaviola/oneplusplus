@@ -31,14 +31,12 @@ class LoginPage extends React.Component {
 		e.preventDefault();
 		try {
 			let response = await userService.login({ email: this.state.email, pw: this.state.pw });
-			console.log(response);
 			if (response.err) {
 				this.setState({
 					message: response.err,
 				});
 			}
 			else {
-				console.log(response)
 				this.props.handleSignupOrLogin();
 				this.props.history.push('/');
 			}
