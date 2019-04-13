@@ -105,7 +105,7 @@ class Chatroom extends React.Component {
                         name='message'
                         ref={this.inputRef}
                         autoComplete='off'
-                        focus
+                        focus='true'
                     />
                     {/* <button className='btn btn-default'>submit</button> */}
                 </form>

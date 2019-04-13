@@ -22,7 +22,7 @@ class MyProfilePage extends React.Component {
         }
         else {
             return (
-                <div className='ProfilePage'>
+                <div className='ProfilePage contentSite'>
                     Please log in to see this page...
                 </div>
             );

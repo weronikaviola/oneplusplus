@@ -31,7 +31,7 @@ class DisplayProfile extends React.Component {
     }
     render() {
         return (
-            <div className='ProfilePage' >
+            <div className='ProfilePage contentSite' >
                 <div className='ProfilePage-photo'>
                     <img src={this.props.user.profile.photo ? this.props.user.profile.photo : ''} alt='profile' />
                 </div>
@@ -41,7 +41,7 @@ class DisplayProfile extends React.Component {
                         <h1>{`"descripiton": "${this.props.user.profile.description}",`}</h1>
                     </div>
                     <div className='ProfilePage-jsonEl'>
-                        <h1>{`"interests": [${this.props.user.profile.interests.map(int => (`"${int}"`))}],`}</h1>
+                        <h1>{`"interests": [${this.props.user.profile.interests.map(int => (`"${int.trim()}"`))}],`}</h1>
                     </div>
                     <div className='ProfilePage-jsonEl'>
                         <h1>{`"connections": "${this.formatToBinary(this.props.user.connections.length)}"`}</h1>

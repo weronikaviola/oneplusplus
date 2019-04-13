@@ -36,7 +36,7 @@ class People extends React.Component {
     // }
     render() {
         return (
-            <div className='People' >
+            <div className='People contentSite' >
 
                 <div className='MyConnections'>
                     MyConnections page

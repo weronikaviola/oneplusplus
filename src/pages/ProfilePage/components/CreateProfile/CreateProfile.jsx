@@ -76,7 +76,7 @@ class CreateProfile extends React.Component {
                     <div className='form-group'>
                         <div className='col-sm-12'>
                             <label>Enter your interests as a list of comma-separated values</label>
-                            <input type='text' className='form-control' value={this.state.interests} name='interests' autoComplete='off' onChange={this.handleChange} pattern='(\w+, )+\w+' />
+                            <input type='text' className='form-control' value={this.state.interests} name='interests' autoComplete='off' onChange={this.handleChange} pattern='([\w\s]*\,)[\w\s]*' />
                         </div>
                     </div>
                     <div className='form-group'>

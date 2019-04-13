@@ -31,7 +31,7 @@ class TestThree extends React.Component {
                         </div>
                     </div>
                     <div className='form-group'>
-                        <button>submit</button>
+                        <button className='btn btn-default'>submit</button>
                     </div>
                 </form>
 

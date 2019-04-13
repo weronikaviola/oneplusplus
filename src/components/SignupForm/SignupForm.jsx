@@ -52,7 +52,7 @@ class SignupForm extends React.Component {
         <form className="form-horizontal" onSubmit={this.handleSubmit} >
           <div className="form-group">
             <div className="col-sm-12">
-              <input type="text" className="form-control" placeholder="username" value={this.state.name} name="name" autoComplete="username" onChange={this.handleChange} />
+              <input type="text" className="form-control" placeholder="username" value={this.state.name} name="name" autoComplete="username" onChange={this.handleChange} autoFocus='true' />
             </div>
           </div>
           <div className="form-group">
