@@ -9,7 +9,7 @@ const InfoPage = (props) => {
             </br>
                 You have 30 seconds... ready?
             </h3>
-            <button onClick={props.toFirstStep}>GO</button>
+            <button className='btn btn-default' onClick={props.toFirstStep}>GO</button>
         </div>
     )
 }

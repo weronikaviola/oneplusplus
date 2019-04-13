@@ -28,7 +28,8 @@ function init(http) {
         });
 
         socket.on('new-message', function (message) {
-            socket.emit('new-message', message);
+            console.log('new msg on the server');
+            io.sockets.emit('new-message', message);
         })
     })
 }

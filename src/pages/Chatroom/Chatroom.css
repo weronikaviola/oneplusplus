@@ -1,0 +1,22 @@
+.Chatroom-messages {
+    display: flex;
+    border: 1px solid gray;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px;
+    height: 70vh;
+    overflow: auto;
+}
+.Chatroom-oneMsg {
+    width: 90%;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    border: 1px solid gray;
+    margin: 2px auto;
+}
+.Chatroom-oneMsg > h4 {
+    display: block;
+    background: black;
+    color: white;
+}

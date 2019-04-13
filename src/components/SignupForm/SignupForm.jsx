@@ -7,7 +7,8 @@ class SignupForm extends React.Component {
     name: '',
     email: '',
     password: '',
-    passwordConf: ''
+    passwordConf: '',
+    passwordMatch: null,
   };
 
   handleChange = (e) => {
@@ -17,9 +18,12 @@ class SignupForm extends React.Component {
     });
   }
 
-  // verifyPass = (e) => {
-  //   e.target.style.border = '1px solid red';
-  // }
+  verifyPass = (e) => {
+    // e.target.style.border = '1px solid red';
+    this.setState({
+      passwordMatch: (this.state.password === this.state.passwordConf)
+    });
+  }
 
   isFormInvalid() {
     return !(this.state.name && this.state.email && this.state.password === this.state.passwordConf);
@@ -28,7 +32,12 @@ class SignupForm extends React.Component {
   handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await userService.signup(this.state);
+      await userService.signup({
+        name: this.state.name,
+        email: this.state.email,
+        password: this.state.password,
+        passwordConf: this.state.passwordConf,
+      });
       this.props.handleSignupOrLogin();
       this.props.history.push('/');
     } catch (err) {
@@ -58,7 +67,10 @@ class SignupForm extends React.Component {
           </div>
           <div className="form-group">
             <div className="col-sm-12">
-              <input type="password" className="form-control" placeholder="Confirm Password" value={this.state.passwordConf} name="passwordConf" autoComplete="new-password" onChange={this.handleChange} />
+              <input type="password" className="form-control" placeholder="Confirm Password" value={this.state.passwordConf} name="passwordConf" autoComplete="new-password" onChange={async (e) => {
+                await this.handleChange(e);
+                this.verifyPass(e);
+              }} style={(this.state.passwordMatch === true) ? { border: '1px solid green' } : this.state.passwordMatch === false ? { border: '1px solid red' } : {}} />
             </div>
           </div>
           <div className="form-group">

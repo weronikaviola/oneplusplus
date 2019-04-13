@@ -18,19 +18,22 @@ class TestOne extends React.Component {
     }
     render() {
         return (
-            <div className='TestPage-test'>
+            <div className='TestPage-test' onSubmit={(evt) => {
+                evt.preventDefault();
+                this.props.nextStep(this.state.answer)
+            }}>
                 <form className='form-horizontal'>
                     <div className='form-group'>
                         <div className='col-sm-12'>
                             <h2> 9 | 5 </h2>
-                            <input type="text" className="form-control" name="answer1" autocomplete='off' value={this.state.answer} onChange={this.handleChange} />
+                            <input type="text" className="form-control" name="answer1" autocomplete='off' value={this.state.answer} onChange={this.handleChange} autoFocus='true' />
                         </div>
                     </div>
-
+                    <div className='form-group'>
+                        <button className='btn btn-default'>next</button>
+                    </div>
                 </form>
-                <button onClick={(evt) => {
-                    this.props.nextStep(this.state.answer)
-                }}>next</button>
+
             </div >
         )
     }

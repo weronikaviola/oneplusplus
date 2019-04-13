@@ -27,6 +27,7 @@ class TestPage extends React.Component {
         this.runTimer();
     }
     nextStep = (answer) => {
+
         this.setState(state => {
             let current = state.stage;
             let answers = state.answers.slice()
@@ -61,14 +62,8 @@ class TestPage extends React.Component {
                 answers: current,
             });
         });
-        let currentAnswers = this.state.answers;
-        let correctAnswers = this.answers()();
-        let total = 0;
-        for (let i = 0; i < 3; i++) {
-            if (currentAnswers[i] === correctAnswers[i]) total++;
-            console.log(`${currentAnswers[i]}, ${correctAnswers[i]}`)
-        }
-        if (total >= 2) {
+        if (this.gradeTest()) {
+            this.props.handleAdmissionTest(true);
             this.props.history.push('/signup');
         } else {
             this.lostTheTest();
@@ -81,11 +76,14 @@ class TestPage extends React.Component {
         window.open('http://www.eharmony.com/');
     }
 
-    answers() {
-        let answers = function () {
-            return ['15', '16', '255'];
+    gradeTest = () => {
+        const correctAnswers = ['15', '16', '255'];
+        let currentAnswers = this.state.answers;
+        let total = 0;
+        for (let i = 0; i < 3; i++) {
+            if (currentAnswers[i] === correctAnswers[i]) total++;
         }
-        return answers;
+        return (total > 2)
     }
 
     render() {

@@ -28,7 +28,8 @@ class App extends Component {
     return {
       test: 'test state value',
       user: null,
-      activeUsers: {}
+      activeUsers: {},
+      admissionPassed: false
     };
   }
 
@@ -40,6 +41,11 @@ class App extends Component {
     }
   }
 
+  handleAdmissionTest = (res) => {
+    this.setState({
+      admissionPassed: res
+    });
+  }
 
   handleLogout = () => {
     socket.leaveChat();
@@ -76,12 +82,13 @@ class App extends Component {
               user={this.state.user}
             />
           } />
-          <Route exact path='/signup' render={({ history }) =>
-            <SignupPage
-              history={history}
-              handleSignupOrLogin={this.handleSignupOrLogin}
-            />
-          } />
+          {this.state.admissionPassed &&
+            <Route exact path='/signup' render={({ history }) =>
+              <SignupPage
+                history={history}
+                handleSignupOrLogin={this.handleSignupOrLogin}
+              />
+            } />}
           <Route exact path='/login' render={({ history }) =>
             <LoginPage
               history={history}
@@ -95,6 +102,7 @@ class App extends Component {
             <TestPage
               history={history}
               unmountApp={this.unmountApp}
+              handleAdmissionTest={this.handleAdmissionTest}
             />
           } />
           <Route exact path='/creators' render={() =>
@@ -112,7 +120,7 @@ class App extends Component {
                 <People updateUserState={this.updateUserState} />
               )} />
               <Route exact path='/chatroom' render={() => (
-                < Chatroom />
+                < Chatroom user={this.state.user} />
               )} />
             </>}
         </Switch>

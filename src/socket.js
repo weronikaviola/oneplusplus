@@ -2,15 +2,25 @@ import tokenService from './utils/tokenService';
 
 const socket = window.io();
 let App = null;
+let Chatroom = null;
 
 function registerApp(app) {
     App = app;
 }
 
+function registerChatroom(obj) {
+    Chatroom = obj;
+}
 
 socket.on('new-message', function (message) {
     console.log('received the message');
-    App.setState({ test: message })
+    Chatroom.setState(state => {
+        const AllMessages = [...state.messages, message];
+        console.log(AllMessages);
+        return ({
+            messages: AllMessages,
+        });
+    })
 })
 
 function joinChat() {
@@ -22,8 +32,7 @@ function leaveChat() {
 }
 
 function newMessage(msg) {
-    console.log('sending message from the socket');
-    socket.emit('new-message', { message: msg });
+    socket.emit('new-message', msg);
     console.log('sent');
 }
 
@@ -31,5 +40,6 @@ export default {
     registerApp,
     joinChat,
     leaveChat,
-    newMessage
+    newMessage,
+    registerChatroom,
 }
