@@ -39,7 +39,8 @@ class Chatroom extends React.Component {
     sendMessage = (evt) => {
         socket.newMessage({
             author: this.props.user.name,
-            text: this.state.message
+            text: this.state.message,
+            color: this.myColor,
         });
         this.setState({
             message: ''
@@ -84,7 +85,7 @@ class Chatroom extends React.Component {
                             return (
                                 <div className='Chatroom-oneMsg' key={this.accumulator}>
                                     <div><span style={{
-                                        color: this.myColor
+                                        color: `${msg.color}`
                                     }}>{msg.author}</span>>>{msg.text}</div>
                                 </div>
                             )

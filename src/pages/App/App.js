@@ -15,6 +15,8 @@ import Creators from '../Creators/Creators';
 import MyProfilePage from '../ProfilePage/MyProfilePage';
 import People from '../People/People';
 import Chatroom from '../Chatroom/Chatroom';
+import Notifications from '../Notifications/Notifications';
+import UserProfile from '../ProfilePage/UserProfile';
 
 import socket from '../../socket';
 
@@ -121,6 +123,12 @@ class App extends Component {
               )} />
               <Route exact path='/chatroom' render={() => (
                 < Chatroom user={this.state.user} />
+              )} />
+              <Route exact path='/notifications' render={() => (
+                <Notifications />
+              )} />
+              <Route path='/profile/:id' render={(props) => (
+                < UserProfile {...props} />
               )} />
             </>}
         </Switch>

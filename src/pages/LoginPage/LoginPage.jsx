@@ -38,7 +38,7 @@ class LoginPage extends React.Component {
 			}
 			else {
 				this.props.handleSignupOrLogin();
-				this.props.history.push('/');
+				this.props.history.push('/notifications');
 			}
 
 		} catch (err) {

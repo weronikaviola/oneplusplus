@@ -17,21 +17,21 @@ const profileSchema = new Schema({
 	interests: [String],
 });
 
+
+const notificationSchema = new Schema({
+	category: String,
+	fromUser: String,
+}, { timestamps: true });
+
+
+
 const userSchema = new Schema({
 	name: String,
 	email: { type: String, required: true, lowercase: true },
 	password: String,
 	connections: [{ type: Schema.Types.ObjectId, ref: 'User' }],
-	profile: profileSchema
-	// description: {
-	// 	type: String,
-	// 	maxlength: 500
-	// },
-	// photo: {
-	// 	type: String,
-	// 	maxlength: 500
-	// },
-	// interests: [String]
+	profile: profileSchema,
+	pendingInvitations: [{ type: Schema.Types.ObjectId, ref: 'User' }],
 }, { timestamps: true });
 
 

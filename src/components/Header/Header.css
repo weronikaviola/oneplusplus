@@ -12,16 +12,3 @@
     padding: 5px;
 }
 
-
-/*iPads------*/
-@media only screen and (min-width: 768px) {
-    .Header {
-        height: 18vh;
-        min-height: 100px;
-    }
-}
-
-/*desktop-----*/
-@media only screen and (min-width: 1024px) {
-    
-}

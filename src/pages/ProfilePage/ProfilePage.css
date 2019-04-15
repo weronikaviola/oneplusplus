@@ -3,11 +3,12 @@
     margin: 0 auto;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1fr 3fr;
+    grid-template-rows: 1fr 2fr;
     grid-template-areas: 
         "photo nothing buttons"
         "json json json";
 }
+
 .ProfilePage-photo {
     height: 20vh;
     grid-area: photo;

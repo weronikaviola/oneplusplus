@@ -14,7 +14,7 @@ const http = require('http').Server(app);
 require('./io').init(http);
 
 const userRouter = require('./routes/api/users');
-const profileRouter = require('./routes/api/profile');
+const profileRouter = require('./routes/api/profiles');
 
 app.use(logger('dev'));
 app.use(express.json());

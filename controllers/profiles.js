@@ -10,7 +10,16 @@ module.exports = {
     getAllFriends,
     getUsers,
     addConnection,
+    getUserInfo,
+}
 
+
+function getUserInfo(req, res) {
+    User.findById(req.params.id)
+        .then(user => res.json(user))
+        .catch(err => res.json({
+            err: 'server error'
+        }));
 }
 
 function addConnection(req, res) {
@@ -44,10 +53,8 @@ function getAllFriends(req, res) {
 
 function getUsers(req, res) {
     if (req.user) {
-        console.log(req.user);
         User.find({ _id: { $nin: req.user.connections } })
             .then(results => {
-                console.log(results);
                 return res.json({ users: results })
             }).catch(err => {
                 console.log(err);

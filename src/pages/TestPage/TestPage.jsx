@@ -89,7 +89,7 @@ class TestPage extends React.Component {
     render() {
         return (
             <div>
-                <Link class='BackBtn' to='/'>back</Link>
+                <Link className='BackBtn' to='/'>back</Link>
                 <br />
                 <br />
                 <Timer time={this.state.timer} />
