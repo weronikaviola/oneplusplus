@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { Link } from 'react-router-dom';
 // import './MyProfilePage.css';
 import DisplayProfile from './components/DisplayProfile/DisplayProfile';
 
@@ -30,6 +30,7 @@ class UserProfile extends React.Component {
     render() {
         return (
             <div className='contentSite'>
+                <Link className='BackBtn' to='/people'>back</Link>
                 <div className='red-text'>{this.state.message}</div>
                 {(this.state.user) ?
                     <div className='UserProfile'>
