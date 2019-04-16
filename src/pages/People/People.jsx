@@ -13,7 +13,9 @@ class People extends React.Component {
     constructor(props) {
         super();
         this.state = {
-            myConnections: []
+            myConnections: [],
+            pending: [],
+            doneFetching: false,
         }
     }
 
@@ -25,57 +27,59 @@ class People extends React.Component {
         }).then(res => res.json());
     }
 
-    // async addToConnections(userId) {
-    //     await fetch('/api/profiles/add', {
-    //         method: 'POST',
-    //         body: JSON.stringify({ userId }),
-    //         headers: {
-    //             'Content-Type': 'application/json',
-    //             'Authorization': 'Bearer ' + tokenService.getToken()
-    //         }
-    //     }).then(res => res.json())
-    //         .then(res => {
-    //             if (res.token) {
-    //                 tokenService.setToken(res.token);
-    //                 this.props.updateUserState();
-    //                 this.findUsers();
-    //             }
-    //         }).catch(err => {
-    //             console.log(err);
-    //         })
-    // }
-
     updateState = async () => {
         let response = await this.getConnections();
         this.setState({
-            myConnections: response.connections
+            myConnections: response.connections,
+            pending: response.pending,
+            doneFetching: true,
         });
+
+    }
+
+    sendMessage() {
+        alert('sending message');
     }
 
     componentDidMount = () => {
         this.updateState();
     }
 
-    //figure out something here? when do I want to update the state? 
-    // componentDidUpdate = async () => {
-    //     this.updateState();
-    // }
     render() {
         return (
             <div className='People contentSite' >
 
-                <div className='MyConnections'>
-                    MyConnections
+                <div className='MyConnections'
+                    style={{
+                        padding: 10
+                    }}>
+                    01100011 01101111 01101110 01101110 01100101 01100011 01110100 01101001 01101111 01101110 01110011
                     {this.state.myConnections.map(connection => (
-                        <div key={connection._id}>
+                        <div
+                            key={connection._id}
+                            style={{
+                                border: '1px solid gray',
+                                borderRadius: '10px',
+                                padding: 5
+                            }}
+                        >
                             <p>{connection.name}</p>
-                            <Link to={`/profile/${connection._id}`}>detils</Link>
+                            <Link
+                                className='btn btn-default btn-sm btn-primary white-text'
+                                to={`/profile/${connection._id}`}>01101101 01101111 01110010 01100101</Link>
+                            <button onClick={this.sendMessage}
+                                className='btn btn-default btn-sm btn-danger white-text'
+                            >01100011 01101000 01100001 01110100 </button>
                         </div>
                     ))}
                 </ div >
-                <FindPeople
-                    updateUserState={this.props.updateUserState}
-                    addToConnections={this.addToConnections} />
+                {this.state.doneFetching &&
+                    <FindPeople
+                        updateUserState={this.props.updateUserState}
+                        addToConnections={this.addToConnections}
+                        myConnections={this.state.myConnections}
+                        pendingInvites={this.state.pending}
+                        thisUserId={this.props.thisUserId} />}
             </div>
         );
     }

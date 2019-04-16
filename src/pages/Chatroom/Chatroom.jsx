@@ -36,15 +36,26 @@ class Chatroom extends React.Component {
         }
     }
 
-    sendMessage = (evt) => {
-        socket.newMessage({
+    // sendMessage = (evt) => {
+    //     socket.newMessage({
+    //         author: this.props.user.name,
+    //         text: this.state.message,
+    //         color: this.myColor,
+    //     });
+    //     this.setState({
+    //         message: ''
+    //     })
+    // }
+    sendMessage = () => {
+        let message = {
             author: this.props.user.name,
             text: this.state.message,
             color: this.myColor,
-        });
+        };
+        this.props.socketMessage(message);
         this.setState({
-            message: ''
-        })
+            message: '',
+        });
     }
 
     ///
@@ -79,8 +90,8 @@ class Chatroom extends React.Component {
                 <div className='Chatroom-messages'
                     ref={this.messengerRef}
                 >
-                    {this.state.messages.length > 0 ?
-                        this.state.messages.map(msg => {
+                    {this.props.messages.length > 0 ?
+                        this.props.messages.map(msg => {
                             this.accumulator += 1;
                             return (
                                 <div className='Chatroom-oneMsg' key={this.accumulator}>

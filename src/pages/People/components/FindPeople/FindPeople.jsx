@@ -9,53 +9,32 @@ import userService from '../../../../utils/userService';
 import UserBox from '../../../../components/UserBox/UserBox';
 
 class FindPeople extends React.Component {
-    constructor() {
+    constructor(props) {
         super();
         this.state = { users: [] }
     }
 
     hideInvitedUser = (id) => {
         let element = this.refs.id;
-        console.log(element);
+    }
+
+    filterUsers = (users) => {
+        let myConnectionsId = this.props.myConnections.map(user => (user._id));
+        let doNotDisplay = [...myConnectionsId, ...this.props.pendingInvites, this.props.thisUserId];
+        return users.filter(user => !(doNotDisplay.includes(user._id)));
     }
 
     async findUsers() {
         let users = await profileService.findUsers();
-        // let url = 'api/profiles/users'
-        // let response = await fetch(url, {
-        //     headers: {
-        //         'Authorization': 'Bearer ' + tokenService.getToken()
-        //     }
-        // })
-        //     .then(res => res.json())
-        // .catch(err => console.log(err));
+        //filter users
+        let filtered = this.filterUsers(users);
         if (users.err) console.log(users);
         else {
             this.setState({
-                users
+                users: filtered
             });
         }
     }
-
-    // async addToConnections(userId) {
-    //     await fetch('/api/profiles/add', {
-    //         method: 'POST',
-    //         body: JSON.stringify({ userId }),
-    //         headers: {
-    //             'Content-Type': 'application/json',
-    //             'Authorization': 'Bearer ' + tokenService.getToken()
-    //         }
-    //     }).then(res => res.json())
-    //         .then(res => {
-    //             if (res.token) {
-    //                 tokenService.setToken(res.token);
-    //                 this.props.updateUserState();
-    //                 this.findUsers();
-    //             }
-    //         }).catch(err => {
-    //             console.log(err);
-    //         })
-    // }
 
     //////
     componentDidMount = () => {
@@ -64,7 +43,7 @@ class FindPeople extends React.Component {
     render() {
         return (
             <div className='FindPeople'>
-                FindPeople page
+                01100110 01101001 01101110 01100100
                 {this.state.users.map(user => (
                     <div className='FindPeople-userBox' key={user._id} ref={user._id}>
                         <UserBox user={user} />

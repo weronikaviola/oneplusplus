@@ -17,8 +17,10 @@ import People from '../People/People';
 import Chatroom from '../Chatroom/Chatroom';
 import Notifications from '../Notifications/Notifications';
 import UserProfile from '../ProfilePage/UserProfile';
+import Messages from '../Messages/Messages';
 
 import socket from '../../socket';
+import notificationService from '../../utils/notificationService';
 
 class App extends Component {
   constructor() {
@@ -31,7 +33,13 @@ class App extends Component {
       test: 'test state value',
       user: null,
       activeUsers: {},
-      admissionPassed: false
+      admissionPassed: false,
+      notificationsNo: 0,
+      notifications: [],
+      ready: false,
+      messages: [],
+      newChat: false,
+      newInvite: false,
     };
   }
 
@@ -61,14 +69,50 @@ class App extends Component {
       user: user
     });
   }
+
+  updateNotifications = async () => {
+    const notifications = await notificationService.getNotifications();
+    const notSeen = notifications.notifications.filter(n => (n.seen === false));
+    this.setState({
+      notifications: notifications.notifications,
+      notificationsNo: notSeen.length,
+    });
+  }
+
+  displayNewInvite = () => {
+    this.setState({ newInvite: true });
+    this.updateNotifications();
+  }
+
+  displayNoInvites = () => {
+    this.setState({ newInvite: false });
+  }
+
+  sendMessage = (msg) => {
+    socket.newMessage(msg);
+  }
+
+  announceNewChatMsg = () => {
+    this.setState({ newChat: true });
+    setTimeout(() => {
+      this.setState({ newChat: false });
+    }, 1000);
+  }
   /*---- lifecycle methods ----*/
   async componentDidMount() {
     socket.registerApp(this);
-    const user = userService.getUser();
+    const user = await userService.getUser();
     if (user) {
+      await this.setState({
+        user,
+      });
       socket.joinChat();
-      this.setState({ user });
+      this.setState({
+        ready: true
+      });
+      await this.updateNotifications();
     }
+
   }
 
   unmountApp() {
@@ -77,7 +121,13 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Header user={this.state.user} handleLogout={this.handleLogout} />
+        <Header
+          user={this.state.user}
+          handleLogout={this.handleLogout}
+          notifications={this.state.notificationsNo}
+          newChat={this.state.newChat}
+          newInvite={this.state.newInvite}
+        />
         <Switch>
           <Route exact path='/' render={() =>
             <MainPage
@@ -119,16 +169,29 @@ class App extends Component {
                 />
               } />
               <Route exact path='/people' render={() => (
-                <People updateUserState={this.updateUserState} />
+                <People
+                  updateUserState={this.updateUserState}
+                  thisUserId={this.state.user._id}
+                />
               )} />
               <Route exact path='/chatroom' render={() => (
-                < Chatroom user={this.state.user} />
+                < Chatroom user={this.state.user}
+                  socketMessage={this.sendMessage}
+                  messages={this.state.messages}
+                />
               )} />
               <Route exact path='/notifications' render={() => (
-                <Notifications />
+                <Notifications
+                  notifications={this.state.notifications}
+                  update={this.updateNotifications}
+                  displayNoInvites={this.displayNoInvites}
+                />
               )} />
               <Route path='/profile/:id' render={(props) => (
                 < UserProfile {...props} />
+              )} />
+              <Route path='/messages' render={(props) => (
+                <Messages {...props} />
               )} />
             </>}
         </Switch>

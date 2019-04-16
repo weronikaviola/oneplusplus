@@ -11,3 +11,15 @@
 .NavBar-welcome {
 	color: red;
 }
+.NavBar-notifications {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 10px;
+}
+.NavBar-notification-circle {
+  height: 15px;
+  width: 15px;
+  border-radius: 50%;
+  background: purple;
+}

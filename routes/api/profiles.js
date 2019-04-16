@@ -12,6 +12,7 @@ router.get('/', profileCtrl.myProfile);
 router.get('/all', profileCtrl.getAllFriends);
 router.get('/users', profileCtrl.getUsers);
 router.get('/:id', profileCtrl.getUserInfo);
+
 router.post('/add', profileCtrl.addConnection);
 router.post('/create', profileCtrl.create);
 

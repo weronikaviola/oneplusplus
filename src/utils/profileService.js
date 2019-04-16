@@ -1,9 +1,11 @@
 import tokenService from './tokenService';
 
+import socket from '../socket';
+
 async function addToConnections(userId) {
     await fetch('/api/profiles/add', {
         method: 'POST',
-        body: JSON.stringify({ userId }),
+        body: JSON.stringify({ invitee: userId }),
         headers: {
             'Content-Type': 'application/json',
             'Authorization': 'Bearer ' + tokenService.getToken()
@@ -13,6 +15,7 @@ async function addToConnections(userId) {
             if (res.token) {
                 tokenService.setToken(res.token);
             }
+            socket.emitInviteNotification(userId);
         }).catch(err => {
             console.log(err);
         })

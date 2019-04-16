@@ -15,6 +15,7 @@ require('./io').init(http);
 
 const userRouter = require('./routes/api/users');
 const profileRouter = require('./routes/api/profiles');
+const notificationRouter = require('./routes/api/notifications');
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -29,7 +30,7 @@ app.post('/file-upload', awsConfig.upload);
 app.use('/api/users', userRouter);
 
 app.use(require('./config/auth'));
-
+app.use('/api/notifications', notificationRouter);
 app.use('/api/profiles', profileRouter);
 
 

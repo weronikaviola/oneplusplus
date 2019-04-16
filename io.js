@@ -1,5 +1,7 @@
 const jwt = require('jsonwebtoken');
 const User = require('./models/user');
+
+
 let io;
 
 const users = {
@@ -14,11 +16,11 @@ module.exports = {
 function init(http) {
     io = require('socket.io')(http);
 
-    io.on('connection', (socket) => {
+    io.on('connection', async (socket) => {
         socket.on('join-chat', async function (token) {
             const user = await validateToken(token);
             if (!user) return;
-            users[users._id] = socket;
+            users[user._id] = socket;
         });
 
         socket.on('leave-chat', async function (token) {
@@ -29,7 +31,15 @@ function init(http) {
 
         socket.on('new-message', function (message) {
             io.sockets.emit('new-message', message);
-        })
+        });
+
+        socket.on('invite-notification', function (userId) {
+            if (users[userId]) {
+                users[userId].emit('invite-notification');
+            } else {
+                console.log(users);
+            }
+        });
     })
 }
 

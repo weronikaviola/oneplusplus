@@ -9,6 +9,9 @@ const notificationSchema = new Schema({
         enum: CATEGORIES,
     },
     fromUser: {
+        type: String,
+    },
+    fromUserId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'FromUser'
     },
@@ -16,10 +19,14 @@ const notificationSchema = new Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
     },
-    created: {
+    createdAt: {
         type: Date,
-        expires: '2m',
+        expires: 60 * 60 * 24,
         default: Date.now,
+    },
+    seen: {
+        type: Boolean,
+        default: false,
     }
 });
 

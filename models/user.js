@@ -18,10 +18,10 @@ const profileSchema = new Schema({
 });
 
 
-const notificationSchema = new Schema({
-	category: String,
-	fromUser: String,
-}, { timestamps: true });
+// const notificationSchema = new Schema({
+// 	category: String,
+// 	fromUser: String,
+// }, { timestamps: true });
 
 
 
@@ -32,6 +32,7 @@ const userSchema = new Schema({
 	connections: [{ type: Schema.Types.ObjectId, ref: 'User' }],
 	profile: profileSchema,
 	pendingInvitations: [{ type: Schema.Types.ObjectId, ref: 'User' }],
+	sentInvites: [{ type: Schema.Types.ObjectId, ref: 'User' }],
 }, { timestamps: true });
 
 

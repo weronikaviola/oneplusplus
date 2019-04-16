@@ -9,7 +9,12 @@ const MenuUser = (props) => {
         <div className='MenuTop'>
             <Link to='/profile' className='MenuTop-link'>MY PROFILE</Link>
             <Link to='/people' className='MenuTop-link'>PEOPLE</Link>
-            <Link to='/chatroom' className='MenuTop-link'>MEET</Link>
+            <Link
+                style={{
+                    textDecoration: `${props.newChat ? 'underline' : 'none'}`
+                }}
+                to='/chatroom' className='MenuTop-link'>MEET</Link>
+            <Link to='/messages' className='MenuTop-link'>MESSAGES</Link>
         </div >
     )
 }

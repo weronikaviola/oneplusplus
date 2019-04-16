@@ -1,4 +1,5 @@
 const User = require('../models/user');
+const Notification = require('../models/notification');
 
 const jwt = require('jsonwebtoken');
 const SECRET = process.env.JWT_SECRET;
@@ -22,18 +23,27 @@ function getUserInfo(req, res) {
         }));
 }
 
-function addConnection(req, res) {
+async function addConnection(req, res) {
     if (req.user) {
-        User.findByIdAndUpdate(req.user._id, { new: true })
+        let updatedUser = await User.findByIdAndUpdate(req.user._id, { new: true })
             .then(user => {
-                if (user.connections.indexOf(req.body.userId) === -1) {
-                    user.connections.push(req.body.userId);
-                }
+                user.sentInvites.push(req.body.invitee);
                 return user.save();
-            }).then(user => {
-                let token = createJWT(user);
-                return res.json({ token });
             });
+        await User.findById(req.body.invitee)
+            .then(user => {
+                let notification = new Notification({
+                    category: 'connectionInvite',
+                    fromUser: req.user.name,
+                    fromUserId: req.user._id,
+                    userId: user._id
+                });
+                return notification.save();
+            }).catch(err => {
+                console.log(err);
+            });
+        let token = createJWT(updatedUser);
+        res.json({ token });
     }
 }
 
@@ -44,7 +54,8 @@ function getAllFriends(req, res) {
             .populate('connections')
             .then(results => {
                 return res.json({
-                    connections: results.connections
+                    connections: results.connections,
+                    pending: results.sentInvites
                 });
             }).catch(err =>
                 console.log(err));
