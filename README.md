@@ -16,10 +16,10 @@ This app was designed as a dating platform for people who love computer science.
 - JSON
 ![photo](https://i.imgur.com/HTZMHMR.png)
 ### getting started
-[starat here](http://one-pp.herokuapp.com/)
+[start here](http://one-pp.herokuapp.com/)
 and pass the admission test
 ![photo](https://i.imgur.com/vVPCNsP.png)
 
 ### future enhancements
-- private messaging (comming up this weekend...)
+- private messaging (coming up this weekend...)
 - binary translator complementary app 
