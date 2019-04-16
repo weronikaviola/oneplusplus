@@ -39,7 +39,7 @@ class SignupForm extends React.Component {
         passwordConf: this.state.passwordConf,
       });
       this.props.handleSignupOrLogin();
-      this.props.history.push('/');
+      this.props.history.push('/profile');
     } catch (err) {
       this.props.updateMessage(err.message);
     }

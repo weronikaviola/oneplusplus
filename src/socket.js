@@ -23,7 +23,6 @@ socket.on('new-message', function (message) {
 });
 
 socket.on('invite-notification', function () {
-    console.log('new invite notification');
     App.displayNewInvite();
 });
 
@@ -40,7 +39,6 @@ function newMessage(msg) {
 }
 
 function emitInviteNotification(userId) {
-    console.log('emiting invite notifiction');
     socket.emit('invite-notification', userId);
 }
 

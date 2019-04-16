@@ -37,7 +37,7 @@ function init(http) {
             if (users[userId]) {
                 users[userId].emit('invite-notification');
             } else {
-                console.log(users);
+                return;
             }
         });
     })

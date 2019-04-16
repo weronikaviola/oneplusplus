@@ -27,7 +27,7 @@ async function accept(req, res) {
 }
 
 function getAll(req, res) {
-    Notification.find({ 'userId': req.user._id })
+    Notification.find({ 'userId': req.user._id }).sort({ 'createdAt': -1 })
         .then(notifications => {
             res.json({ notifications })
         })

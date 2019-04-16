@@ -114,9 +114,6 @@ class App extends Component {
     }
   }
 
-  componentDidUpdate = async () => {
-    if (this.state.user) this.updateNotifications();
-  }
 
   unmountApp() {
     ReactDOM.unmountComponentAtNode(document.getElementById('root'));
@@ -148,6 +145,7 @@ class App extends Component {
             <LoginPage
               history={history}
               handleSignupOrLogin={this.handleSignupOrLogin}
+              updateNotifications={this.updateNotifications}
             />
           } />
           <Route exact path='/about' render={() =>
