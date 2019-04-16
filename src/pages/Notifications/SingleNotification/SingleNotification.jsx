@@ -47,6 +47,10 @@ const SingleNotification = (props) => {
                 <div
                         className='btn btn-danger btn-sm'
                         disabled={props.element.seen}
+                        onClick={() => {
+                            notificationService.decline(props.element._id);
+                            props.update();
+                        }}
                     >
                         decline
                 </div>

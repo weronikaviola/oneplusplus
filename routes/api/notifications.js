@@ -9,6 +9,7 @@ router.use(authMiddleware);
 //
 router.get('/all', notificationCtrl.getAll);
 router.post('/accept', notificationCtrl.accept);
+router.post('/decline', notificationCtrl.decline);
 
 
 module.exports = router;

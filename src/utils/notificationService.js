@@ -10,6 +10,20 @@ async function getNotifications() {
     }).then(res => res.json());
 }
 
+function decline(notId) {
+    return fetch('/api/notifications/decline', {
+        method: 'POST',
+        headers: {
+            'Authorization': 'Bearer ' + tokenService.getToken(),
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            notification: notId,
+        })
+    }).then(res => res.json())
+        .catch(err => console.log(err));
+}
+
 async function acceptInvite(id, notId) {
     let result = await fetch('/api/notifications/accept', {
         method: 'POST',
@@ -29,4 +43,5 @@ async function acceptInvite(id, notId) {
 export default {
     getNotifications,
     acceptInvite,
+    decline,
 }

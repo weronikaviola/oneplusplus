@@ -99,7 +99,7 @@ class App extends Component {
     }, 1000);
   }
   /*---- lifecycle methods ----*/
-  async componentDidMount() {
+  componentDidMount = async () => {
     socket.registerApp(this);
     const user = await userService.getUser();
     if (user) {
@@ -112,7 +112,10 @@ class App extends Component {
       });
       await this.updateNotifications();
     }
+  }
 
+  componentDidUpdate = async () => {
+    if (this.state.user) this.updateNotifications();
   }
 
   unmountApp() {

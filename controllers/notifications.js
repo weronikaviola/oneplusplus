@@ -4,8 +4,16 @@ const User = require('../models/user');
 module.exports = {
     getAll,
     accept,
+    decline,
 }
 
+
+function decline(req, res) {
+    Notification.findByIdAndUpdate(req.body.notification, { seen: true }).catch(err => console.log(err));
+    res.json({
+        ok: 'ok'
+    });
+}
 
 async function accept(req, res) {
     User.findByIdAndUpdate(req.body.fromUser, { $push: { connections: req.user._id } })
