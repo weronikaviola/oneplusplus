@@ -2,7 +2,8 @@
 ![photo](https://i.imgur.com/obbMsnS.png)
 ### introduction
 
-This app was designed as a dating platform for people who love computer science. It's a full-stack MERN app.
+Dating reinvented - A full-stack MERN app connecting people that love computer science
+
 ### technologies used
 - React
 - Node.js
