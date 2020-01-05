@@ -1,11 +1,20 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import {
+    DESCRIPTION,
+    QUOTE,
+} from './Constants';
 
 const About = (props) => {
     return (
         <div className='contentSite'>
             <Link className='BackBtn' to='/'>back</Link>
-            This page uses binary representation of 8-bit ASCII Character Codes.
+            <div className='paddedContent'>
+                {DESCRIPTION}
+            </div>
+            <div>
+                {QUOTE}
+            </div>
         </div>
     )
 };

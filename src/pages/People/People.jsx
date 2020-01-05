@@ -38,7 +38,7 @@ class People extends React.Component {
     }
 
     sendMessage() {
-        alert('sending message');
+        alert('we are sorry. private messages are not yet available');
     }
 
     componentDidMount = () => {

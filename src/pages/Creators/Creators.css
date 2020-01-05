@@ -1,0 +1,14 @@
+.aboutAuthor {
+  margin-top: 5vh;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  column-gap: 20px;
+}
+.authorImage {
+  height: 60vh;
+  position: relative;
+}
+.authorImage > img {
+  height: 100%;
+  opacity: 0.3;
+}

@@ -14,7 +14,6 @@ const MenuUser = (props) => {
                     textDecoration: `${props.newChat ? 'underline' : 'none'}`
                 }}
                 to='/chatroom' className='MenuTop-link'>MEET</Link>
-            <Link to='/messages' className='MenuTop-link'>MESSAGES</Link>
         </div >
     )
 }

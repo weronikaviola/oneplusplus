@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import profileService from '../../utils/profileService';
 // import './MyProfilePage.css';
 import DisplayProfile from './components/DisplayProfile/DisplayProfile';
 
@@ -42,7 +43,8 @@ class UserProfile extends React.Component {
                 <button
                     className='btn btn-default'
                     onClick={() => {
-                        this.addToConnections(this.state.user._id)
+                        profileService.addToConnections(this.state.user._id)
+                        alert('invitation to connect has been sent')
                     }}
                 >
                     01100001 01100100 01100100

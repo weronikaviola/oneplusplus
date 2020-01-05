@@ -15,6 +15,9 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+.paddedContent {
+  padding: 10vh;
+}
 .contentSite {
   background: rgb(20,20,20);
   min-height: 82vh;
